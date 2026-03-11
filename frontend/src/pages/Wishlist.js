@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import toast from 'react-hot-toast';
 
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 export default function Wishlist() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +38,7 @@ export default function Wishlist() {
             <div key={p._id} style={{ background: 'var(--black)', position: 'relative' }}>
               <Link to={`/product/${p._id}`} style={{ display: 'block', paddingBottom: '100%', position: 'relative', overflow: 'hidden', background: 'var(--surface)' }}>
                 {p.images?.[0]
-                  ? <img src={`http://localhost:5000${p.images[0]}`} alt={p.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ? <img src={`${API_BASE}${p.images[0]}`} alt={p.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                   : <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', color: 'var(--border2)', opacity: 0.3 }}>✦</div>
                 }
               </Link>

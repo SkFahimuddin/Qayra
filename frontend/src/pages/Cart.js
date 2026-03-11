@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 export default function Cart() {
   const { cart, cartTotal, updateQty, removeItem } = useCart();
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ export default function Cart() {
               <div key={item.product._id} className="cart-item" style={s.item}>
                 <div className="cart-item-img" style={s.imgWrap}>
                   {item.product.images?.[0]
-                    ? <img src={`http://localhost:5000${item.product.images[0]}`} alt={item.product.name} style={s.img} />
+                    ? <img src={`${API_BASE}${item.product.images[0]}`} alt={item.product.name} style={s.img} />
                     : <div style={{ ...s.img, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', color: 'var(--border2)' }}>✦</div>
                   }
                 </div>

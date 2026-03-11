@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 const EMPTY = { name: '', description: '', price: '', originalPrice: '', category: 'Attar', stock: '', volume: '', concentration: 'Pure Attar', featured: false, tags: '' };
 
 export default function AdminProducts() {
@@ -104,7 +106,7 @@ export default function AdminProducts() {
               <tr key={p._id}>
                 <td>
                   {p.images?.[0]
-                    ? <img src={`http://localhost:5000${p.images[0]}`} alt={p.name} style={{ width: '50px', height: '60px', objectFit: 'cover', border: '1px solid var(--border)' }} />
+                    ? <img src={`${API_BASE}${p.images[0]}`} alt={p.name} style={{ width: '50px', height: '60px', objectFit: 'cover', border: '1px solid var(--border)' }} />
                     : <div style={{ width: '50px', height: '60px', background: 'var(--surface2)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--border2)', fontSize: '18px' }}>✦</div>
                   }
                 </td>

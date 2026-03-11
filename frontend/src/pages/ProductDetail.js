@@ -6,6 +6,8 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -84,7 +86,7 @@ export default function ProductDetail() {
           <div className="product-image-section" style={s.imageSection}>
             <div style={s.imageWrap}>
               {product.images?.[0]
-                ? <img src={`http://localhost:5000${product.images[0]}`} alt={product.name} style={s.image} />
+                ? <img src={`${API_BASE}${product.images[0]}`} alt={product.name} style={s.image} />
                 : <div style={s.imagePlaceholder}><span style={{ fontSize: '80px', color: 'var(--border2)', opacity: 0.3 }}>✦</span></div>
               }
             </div>

@@ -5,6 +5,8 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
+const API_BASE = process.env.REACT_APP_API_URL || '';
+
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { toggle, isWishlisted } = useWishlist();
@@ -39,7 +41,7 @@ export default function ProductCard({ product }) {
       {/* Image */}
       <div style={{ position: 'relative', paddingBottom: '120%', overflow: 'hidden', background: 'var(--surface)' }}>
         {product.images?.[0]
-          ? <img src={`http://localhost:5000${product.images[0]}`} alt={product.name}
+          ? <img src={`${API_BASE}${product.images[0]}`} alt={product.name}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s', transform: hover ? 'scale(1.06)' : 'scale(1)' }} />
           : <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px' }}>
               <div style={{ fontSize: '48px', opacity: 0.15 }}>✦</div>
