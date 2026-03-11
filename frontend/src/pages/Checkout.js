@@ -52,14 +52,22 @@ export default function Checkout() {
 
   return (
     <div className="page">
+      <style>{`
+        @media (max-width: 768px) {
+          .checkout-layout { flex-direction: column-reverse !important; }
+          .checkout-summary { width: 100% !important; position: static !important; }
+          .checkout-grid2 { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
+
       <div className="container">
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '32px', letterSpacing: '6px', marginBottom: '48px' }}>CHECKOUT</h1>
-        <div style={s.layout}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '5px', marginBottom: '32px' }}>CHECKOUT</h1>
+        <div className="checkout-layout" style={s.layout}>
           <form onSubmit={handleSubmit} style={{ flex: 1 }}>
             {/* Shipping */}
             <div style={s.block}>
               <div style={s.blockTitle}>SHIPPING DETAILS</div>
-              <div style={s.grid2}>
+              <div className="checkout-grid2" style={s.grid2}>
                 {[['street', 'STREET ADDRESS', 'text', true, '123 Al Olaya, Riyadh'],
                   ['city', 'CITY', 'text', true, 'Riyadh'],
                   ['state', 'STATE / PROVINCE', 'text', false, 'Riyadh'],
@@ -94,21 +102,21 @@ export default function Checkout() {
               )}
             </div>
 
-            <button type="submit" disabled={loading} className="btn btn-gold" style={{ width: '100%', padding: '16px', letterSpacing: '4px', fontSize: '14px' }}>
+            <button type="submit" disabled={loading} className="btn btn-gold" style={{ width: '100%', padding: '15px', letterSpacing: '4px', fontSize: '13px' }}>
               {loading ? 'PLACING ORDER...' : 'PLACE ORDER'}
             </button>
           </form>
 
           {/* Summary */}
-          <div style={s.summary}>
+          <div className="checkout-summary" style={s.summary}>
             <div style={s.sumTitle}>ORDER SUMMARY</div>
             {items.map(item => item.product && (
               <div key={item.product._id} style={s.sumItem}>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '1px', color: 'var(--cream)' }}>{item.product.name}</div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '14px', letterSpacing: '1px', color: 'var(--cream)' }}>{item.product.name}</div>
                   <div style={{ fontSize: '12px', color: 'var(--text3)', fontFamily: 'var(--font-ui)' }}>Qty: {item.quantity} · {item.product.volume}</div>
                 </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '14px', color: 'var(--gold)' }}>${(item.product.price * item.quantity).toFixed(2)}</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '13px', color: 'var(--gold)' }}>${(item.product.price * item.quantity).toFixed(2)}</div>
               </div>
             ))}
             <div style={s.sumRows}>
@@ -125,17 +133,17 @@ export default function Checkout() {
 }
 
 const s = {
-  layout: { display: 'flex', gap: '40px', alignItems: 'flex-start' },
-  block: { border: '1px solid var(--border)', padding: '28px', marginBottom: '20px', background: 'var(--surface)' },
-  blockTitle: { fontFamily: 'var(--font-display)', fontSize: '12px', letterSpacing: '4px', color: 'var(--gold)', marginBottom: '20px' },
-  grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' },
+  layout: { display: 'flex', gap: '32px', alignItems: 'flex-start' },
+  block: { border: '1px solid var(--border)', padding: '24px', marginBottom: '16px', background: 'var(--surface)' },
+  blockTitle: { fontFamily: 'var(--font-display)', fontSize: '12px', letterSpacing: '4px', color: 'var(--gold)', marginBottom: '18px' },
+  grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' },
   field: { display: 'flex', flexDirection: 'column', gap: '6px' },
   label: { fontFamily: 'var(--font-display)', fontSize: '9px', letterSpacing: '3px', color: 'var(--text3)' },
-  couponSuccess: { marginTop: '12px', fontSize: '13px', color: 'var(--text2)', fontFamily: 'var(--font-ui)', fontStyle: 'italic' },
-  summary: { width: '300px', flexShrink: 0, border: '1px solid var(--border)', padding: '24px', background: 'var(--surface)', position: 'sticky', top: '130px' },
-  sumTitle: { fontFamily: 'var(--font-display)', fontSize: '12px', letterSpacing: '4px', color: 'var(--gold)', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid var(--border)' },
-  sumItem: { display: 'flex', gap: '12px', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border)' },
-  sumRows: { paddingTop: '16px' },
+  couponSuccess: { marginTop: '10px', fontSize: '13px', color: 'var(--text2)', fontFamily: 'var(--font-ui)', fontStyle: 'italic' },
+  summary: { width: '280px', flexShrink: 0, border: '1px solid var(--border)', padding: '20px', background: 'var(--surface)', position: 'sticky', top: '100px' },
+  sumTitle: { fontFamily: 'var(--font-display)', fontSize: '12px', letterSpacing: '4px', color: 'var(--gold)', marginBottom: '16px', paddingBottom: '14px', borderBottom: '1px solid var(--border)' },
+  sumItem: { display: 'flex', gap: '10px', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border)' },
+  sumRows: { paddingTop: '14px' },
   sumRow: { display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text2)', marginBottom: '8px', fontFamily: 'var(--font-ui)' },
-  sumTotal: { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-display)', fontSize: '16px', letterSpacing: '2px', padding: '16px 0', marginTop: '8px', borderTop: '1px solid var(--border)' },
+  sumTotal: { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-display)', fontSize: '15px', letterSpacing: '2px', padding: '14px 0', marginTop: '6px', borderTop: '1px solid var(--border)' },
 };
